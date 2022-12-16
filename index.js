@@ -10,7 +10,7 @@ const config = require("./config");
 
 const app = express();
 
-connect(config.db.test, config.db.options);
+connect(config.db);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

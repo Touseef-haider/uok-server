@@ -2,7 +2,8 @@ module.exports = {
   port: process.env.PORT || 8081,
   db: {
     prod: process.env.DATABASE_URL_PROD,
-    test: process.env.DATABASE_URL_DEV,
+    dev: process.env.DATABASE_URL_DEV,
+    local: "mongodb://localhost:27017/uok",
     options: {
       useNewUrlParser: true,
       useUnifiedTopology: true,
