@@ -19,9 +19,6 @@ app.use(helmet());
 app.use(morgan("dev"));
 app.use(cors());
 
-// apis
-app.use("/api", routes);
-
 app.use((req, res, next) => {
   req.header("Access-Control-Allow-Origin", "*");
   req.header(
@@ -30,6 +27,13 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+app.get("/", (req, res) => {
+  return res.status(200).json({ message: `Hi from UOK server`, status: 200 });
+});
+
+// apis
+app.use("/api", routes);
 
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
