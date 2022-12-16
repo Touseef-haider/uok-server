@@ -3,7 +3,7 @@ module.exports = {
   db: {
     prod: process.env.DATABASE_URL_PROD,
     dev: process.env.DATABASE_URL_DEV,
-    local: "mongodb://localhost:27017/uok",
+    local: process.env.DATABASE_URL_LOCAL,
     options: {
       useNewUrlParser: true,
       useUnifiedTopology: true,

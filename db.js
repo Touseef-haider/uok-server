@@ -19,8 +19,8 @@ const connect = async (configuration) => {
     }
     if (url) {
       await mongoose.connect(url, configuration.options);
+      console.log("Connected to database ", url);
     }
-    console.log("Connected to database ", url);
   } catch (error) {
     console.log(error);
   }
