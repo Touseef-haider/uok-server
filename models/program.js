@@ -9,6 +9,9 @@ const programSchema = new Schema(
     duration: {
       type: Number,
     },
+    is_deleted: {
+      type: Boolean,
+    },
     courses: [
       {
         type: mongoose.Types.ObjectId,

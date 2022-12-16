@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const bcrypt = require("bcryptjs");
 
 const hashPassword = (password) =>

@@ -3,7 +3,7 @@ const User = require("../models/user");
 const { verifyPassword } = require("../utils/authentications");
 const { signAccessToken } = require("../utils/jwtHelper");
 
-exports.addUser = async (req, res, next) => {
+exports.register = async (req, res, next) => {
   try {
     const { email } = req.body;
     const userExist = await User.findOne({ email, is_deleted: false });
