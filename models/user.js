@@ -1,23 +1,58 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
+const userSchema = new Schema(
+  {
+    seat_number: {
+      type: String,
+    },
+    first_name: {
+      type: String,
+      required: true,
+    },
+    last_name: {
+      type: String,
+      required: true,
+    },
+    program: {
+      type: mongoose.Types.ObjectId,
+      ref: "program",
+    },
+    department: {
+      type: String,
+    },
+    semester: {
+      type: String,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+    },
+    is_pass_out: {
+      type: Boolean,
+      default: false,
+    },
+    pass_out_date: {
+      type: Date,
+    },
+    is_deleted: {
+      type: Boolean,
+      default: false,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
   },
-  email: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  {
+    timestamps: {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    },
+  }
+);
 
 module.exports = mongoose.model("user", userSchema);

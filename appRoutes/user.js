@@ -1,8 +1,9 @@
-const route = require("express").Router();
+const Router = require("express").Router();
 const requireAuth = require("../middlewares/auth");
-const roleAuth = require("../middlewares/role");
-const { getUsers } = require("../controllers/user");
+const { getUsers, updateUser: updateProfile } = require("../controllers/user");
 
-route.get("/", [requireAuth, roleAuth("admin")], getUsers);
+Router.get("/", [requireAuth], getUsers);
+Router.put("/:id", [requireAuth], updateProfile);
+Router.delete("/:id", [requireAuth], getUsers);
 
-module.exports = route;
+module.exports = Router;
