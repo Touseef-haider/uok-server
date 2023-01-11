@@ -1,0 +1,23 @@
+version: '3.1'
+services:
+  server:
+    build: .
+    container_name: uok-server
+    image: uok-image
+    ports:
+      - 3001:8081
+    depends_on:
+      - database
+    volumes:
+      - .:/app
+  
+  database:
+    image: mongo
+    container_name: mongodb-container
+    ports:
+      - 27017:27017
+    volumes:
+      - database:/data/db
+
+volumes:
+  database:

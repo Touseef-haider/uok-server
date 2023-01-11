@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "start": "node init && node index.js",
+    "dev": "node init && cross-env NODE_ENV=development nodemon index.js",
     "pretest": "eslint --fix --ignore-path .gitignore .",
     "prepare": "husky install"
   },
