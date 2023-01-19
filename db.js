@@ -4,7 +4,7 @@ const connect = async (configuration) => {
   try {
     let url = "";
     switch (process.env.NODE_ENV) {
-      case "dev":
+      case "development":
         url = configuration.dev;
         break;
       case "prod":
