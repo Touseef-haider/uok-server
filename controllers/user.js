@@ -1,17 +1,19 @@
 const createHttpError = require("http-errors");
 const User = require("../models/user");
-const { verifyPassword } = require("../utils/authentications");
+const { verifyPassword, hashPassword } = require("../utils/authentications");
 const { signAccessToken } = require("../utils/jwtHelper");
 
 exports.register = async (req, res, next) => {
   try {
     const { email } = req.body;
+
     const userExist = await User.findOne({ email, is_deleted: false });
     if (userExist) {
       return next(createHttpError(403, "User already exists with this email"));
     }
+    const hashedPassword = await hashPassword(req.body.password);
 
-    const user = new User(req.body);
+    const user = new User({ ...req.body, password: hashedPassword });
     await user.save();
     return res.status(200).json({
       message: "User added successfully",
@@ -44,6 +46,7 @@ exports.login = async (req, res, next) => {
       user: userExist,
     });
   } catch (err) {
+    console.log(err);
     return next(err);
   }
 };
@@ -70,7 +73,7 @@ exports.updateUser = async (req, res, next) => {
 
 exports.deleteUser = async (req, res, next) => {
   try {
-    await User.findByIdAndUpdate({ _id: req.params.id }, { is_deleted: true });
+    await User.findByIdAndDelete({ _id: req.params.id });
     res.status(200).json({
       message: "User deleted",
     });

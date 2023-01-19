@@ -3,15 +3,15 @@ module.exports = {
   db: {
     prod: process.env.DATABASE_URL_PROD,
     dev: process.env.DATABASE_URL_DEV,
-    local: process.env.DATABASE_URL_LOCAL,
+    local: "mongodb://127.0.0.1:27017/uok-server",
     options: {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },
   },
   jwt: {
-    secret: process.env.JWT_SECRET || "development_secret",
-    refreshSecret: process.env.JWT_REFRESH_SECRET || "refresh_secret",
+    secret: process.env.ACCESS_TOKEN_SECRET || "development_secret",
+    refreshSecret: process.env.REFRESH_TOKEN_SECRET || "refresh_secret",
     expiry: "7d",
     refreshExpiry: "2d",
   },

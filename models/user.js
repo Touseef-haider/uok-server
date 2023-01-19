@@ -1,9 +1,13 @@
 const mongoose = require("mongoose");
+const { ROLES } = require("../utils/constant");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
     seat_number: {
+      type: String,
+    },
+    admin_id: {
       type: String,
     },
     first_name: {
@@ -19,17 +23,20 @@ const userSchema = new Schema(
       ref: "program",
     },
     department: {
-      type: String,
+      type: mongoose.Types.ObjectId,
+      ref: "category",
     },
     semester: {
-      type: String,
+      type: Number,
     },
     email: {
       type: String,
+      unique: true,
       required: true,
     },
     phone: {
-      type: String,
+      type: Number,
+      required: true,
     },
     is_pass_out: {
       type: Boolean,
@@ -37,6 +44,11 @@ const userSchema = new Schema(
     },
     pass_out_date: {
       type: Date,
+    },
+    role: {
+      type: String,
+      enum: [ROLES.ADMIN, ROLES.STUDENT],
+      required: true,
     },
     is_deleted: {
       type: Boolean,
