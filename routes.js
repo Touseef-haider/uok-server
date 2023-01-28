@@ -10,7 +10,7 @@ Router.post("/login", login);
 Router.post("/register", register);
 Router.use("/users", userRoutes);
 Router.use("/categories", categoryRoutes);
-Router.use("/activity", activityRoutes);
-Router.use("/scholarship", scholarshipRoutes);
+Router.use("/activities", activityRoutes);
+Router.use("/scholarships", scholarshipRoutes);
 
 module.exports = Router;

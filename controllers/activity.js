@@ -1,4 +1,3 @@
-const createHttpError = require("http-errors");
 const Activity = require("../models/activity");
 
 exports.addActivity = async (req, res, next) => {
@@ -44,15 +43,6 @@ exports.getParticularActivity = async (req, res, next) => {
 
 exports.updateParticularActivity = async (req, res, next) => {
   try {
-    const ActivityExistWithTheEmail = await Activity.findOne({
-      email: req.body.email,
-    });
-    if (ActivityExistWithTheEmail) {
-      return next(
-        createHttpError(403, "Activity already exist with this email address")
-      );
-    }
-
     await Activity.findByIdAndUpdate(
       {
         _id: req.params.id,

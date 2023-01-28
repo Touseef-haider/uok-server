@@ -1,4 +1,3 @@
-const createHttpError = require("http-errors");
 const Scholarship = require("../models/scholarship");
 
 exports.addScholarship = async (req, res, next) => {
@@ -44,18 +43,6 @@ exports.getParticularScholarship = async (req, res, next) => {
 
 exports.updateParticularScholarship = async (req, res, next) => {
   try {
-    const ScholarshipExistWithTheEmail = await Scholarship.findOne({
-      email: req.body.email,
-    });
-    if (ScholarshipExistWithTheEmail) {
-      return next(
-        createHttpError(
-          403,
-          "Scholarship already exist with this email address"
-        )
-      );
-    }
-
     await Scholarship.findByIdAndUpdate(
       {
         _id: req.params.id,
