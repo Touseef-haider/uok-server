@@ -4,7 +4,7 @@ module.exports = {
     prod: process.env.DATABASE_URL_PROD,
     dev: process.env.DATABASE_URL_DEV,
     local:
-      "mongodb+srv://touseef:Test12345@uok.eqmtjwx.mongodb.net/?retryWrites=true&w=majority/",
+      "mongodb+srv://touseef:Test12345@uok.eqmtjwx.mongodb.net/?retryWrites=true",
     options: {
       useNewUrlParser: true,
       useUnifiedTopology: true,

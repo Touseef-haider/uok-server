@@ -5,7 +5,12 @@ const { Schema } = mongoose;
 const categorySchema = new Schema(
   {
     name: String,
-
+    abbreviation: {
+      type: String,
+    },
+    category: {
+      type: String,
+    },
     description: {
       type: String,
     },
@@ -20,7 +25,17 @@ const categorySchema = new Schema(
         ref: "category",
       },
     ],
-
+    chairman_name: {
+      type: String,
+    },
+    image: {
+      type: Buffer,
+    },
+    programs: [
+      {
+        type: String,
+      },
+    ],
     ancestors: [
       {
         _id: {

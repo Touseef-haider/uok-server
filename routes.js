@@ -1,17 +1,16 @@
 const Router = require("express").Router();
 const userRoutes = require("./appRoutes/user");
-const programRoutes = require("./appRoutes/program");
-const courseRoutes = require("./appRoutes/course");
 const categoryRoutes = require("./appRoutes/category");
+const activityRoutes = require("./appRoutes/activity");
+const scholarshipRoutes = require("./appRoutes/scholarship");
 
 const { login, register } = require("./controllers/user");
 
 Router.post("/login", login);
 Router.post("/register", register);
-
 Router.use("/users", userRoutes);
-Router.use("/programs", programRoutes);
-Router.use("/courses", courseRoutes);
 Router.use("/categories", categoryRoutes);
+Router.use("/activity", activityRoutes);
+Router.use("/scholarship", scholarshipRoutes);
 
 module.exports = Router;

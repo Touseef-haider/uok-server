@@ -15,12 +15,11 @@ exports.addCategory = async (req, res, next) => {
     const parent = req.body.parent ? req.body.parent : null;
 
     const category = new Category({
+      ...req.body,
       name: req.body.name,
       description: req.body.description,
       price: req.body.price,
       parent,
-      add_ons: req.body.add_ons,
-      r_and_i: req.body.r_and_i,
     });
     if (parent !== null) {
       const pc = await Category.findById({
@@ -87,7 +86,6 @@ exports.getCategory = async (req, res, next) => {
         name: true,
         ancestors: true,
         child: true,
-        add_ons: true,
       })
       .exec();
     return res.status(201).send({
@@ -121,21 +119,16 @@ exports.getParentCategoriesWithTheirChilds = async (req, res, next) => {
 // for updating category
 exports.updateCategory = async (req, res, next) => {
   try {
-    return Category.findByIdAndUpdate(
+    await Category.findByIdAndUpdate(
       {
         _id: req.params.id,
       },
-      req.body,
-      (err, doc) => {
-        if (err) {
-          throw createError.BadRequest("category not exist");
-        }
-        return res.status(200).json({
-          message: "updated",
-          doc,
-        });
-      }
+      req.body
     );
+
+    return res.status(200).json({
+      message: "category updated",
+    });
   } catch (error) {
     return next(error);
   }

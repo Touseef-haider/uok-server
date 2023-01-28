@@ -72,6 +72,39 @@ exports.updateUser = async (req, res, next) => {
   }
 };
 
+exports.getParticularUser = async (req, res, next) => {
+  try {
+    const user = await User.findById({ _id: req.params.id });
+    return res.status(200).json(user);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+exports.updateParticularUser = async (req, res, next) => {
+  try {
+    const userExistWithTheEmail = await User.findOne({ email: req.body.email });
+    if (userExistWithTheEmail) {
+      return next(
+        createHttpError(403, "User already exist with this email address")
+      );
+    }
+
+    await User.findByIdAndUpdate(
+      {
+        _id: req.params.id,
+      },
+      req.body
+    );
+
+    return res.status(200).json({
+      message: "User updated",
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
 exports.deleteUser = async (req, res, next) => {
   try {
     await User.findByIdAndDelete({ _id: req.params.id });
