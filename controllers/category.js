@@ -150,5 +150,17 @@ exports.deleteCategory = async (req, res, next) => {
   }
 };
 
+exports.getAllParents = async (req, res, next) => {
+  try {
+    const parents = await Category.find({
+      parent: null,
+    }).select("-child -ancestors");
+
+    return res.status(200).json(parents);
+  } catch (error) {
+    return next(error);
+  }
+};
+
 // for validation
 exports.validateCategory = [body("name").isString()];

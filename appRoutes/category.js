@@ -5,8 +5,8 @@ const {
   validateCategory,
   getCategory,
   deleteCategory,
+  getAllParents,
   getParentCategoriesWithTheirChilds,
-  getParentCategories,
   updateCategory,
 } = require("../controllers/category");
 const requireAuth = require("../middlewares/auth");
@@ -20,7 +20,7 @@ router.post(
 
 router.get("/", [requireAuth], getCategories);
 
-router.get("/parent", [requireAuth], getParentCategories);
+router.get("/parents", [requireAuth], getAllParents);
 
 router.get("/parents", getParentCategoriesWithTheirChilds);
 
