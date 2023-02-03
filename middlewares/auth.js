@@ -11,7 +11,7 @@ const requireAuth = (req, res, next) => {
     req.user = payload;
     next();
   } catch (err) {
-    console.log(err);
+    return next(err);
   }
 };
 

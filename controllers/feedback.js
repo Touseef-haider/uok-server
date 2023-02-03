@@ -23,13 +23,16 @@ exports.getFeedbacks = async (req, res, next) => {
 
 exports.getFeedbacksByMonth = async (req, res, next) => {
   try {
-    const feedbackByMonths = await Feedback.find({
-      $expr: [
-        {
-          $eq: [{ $month: "$date" }, parseInt(req.query.month)],
+    const feedbackByMonths = await Feedback.aggregate([
+      { $match: { date: { $exists: true } } },
+      {
+        $project: {
+          month: { $month: "$date" },
+          message: 1,
         },
-      ],
-    });
+      },
+      { $match: { month: parseInt(req.query.month) } },
+    ]);
     return res.status(200).json(feedbackByMonths);
   } catch (error) {
     return next(error);
