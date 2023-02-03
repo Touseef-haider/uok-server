@@ -3,8 +3,8 @@ module.exports = {
   db: {
     prod: process.env.DATABASE_URL_PROD,
     dev: process.env.DATABASE_URL_DEV,
-    local:
-      "mongodb+srv://touseef:Test12345@uok.eqmtjwx.mongodb.net/?retryWrites=true",
+    stag: process.env.DATABASE_URL_STAG,
+    local: process.env.DATABASE_URL_LOCAL,
     options: {
       useNewUrlParser: true,
       useUnifiedTopology: true,
