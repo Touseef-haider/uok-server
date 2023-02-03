@@ -3,7 +3,6 @@ const bcrypt = require("bcryptjs");
 
 const hashPassword = (password) =>
   new Promise((resolve, reject) => {
-    // Generate a salt at level 12 strength
     bcrypt.genSalt(12, (err, salt) => {
       if (err) {
         reject(err);
@@ -17,7 +16,6 @@ const hashPassword = (password) =>
     });
   });
 
-// eslint-disable-next-line
 const verifyPassword = async (passwordAttempt, hashedPassword) =>
   await bcrypt.compare(passwordAttempt, hashedPassword);
 

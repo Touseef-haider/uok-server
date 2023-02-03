@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-boilerplate",
+  "name": "UOK SERVER",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -38,6 +38,6 @@
       "git add"
     ]
   },
-  "repository": "https://github.com/Touseef-haider/nodejs-boilerplate-with-docker.git",
+  "repository": "https://github.com/Touseef-haider/uok-server.git",
   "author": "touseef-haider <touseefhaider355@gmail.com>"
 }

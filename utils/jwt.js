@@ -19,7 +19,6 @@ module.exports = {
         resolve(token);
       });
     }),
-  // eslint-disable-next-line
   verifyAccessToken: (access_token) =>
     JWT.verify(access_token, config.jwt.secret, (err, payload) => {
       if (err) {
@@ -28,7 +27,6 @@ module.exports = {
         throw createError(401, message);
       }
       return {
-        // eslint-disable-next-line
         ...payload._doc,
       };
     }),

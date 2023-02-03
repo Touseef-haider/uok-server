@@ -1,7 +1,7 @@
 const createHttpError = require("http-errors");
 const User = require("../models/user");
 const { verifyPassword, hashPassword } = require("../utils/authentications");
-const { signAccessToken } = require("../utils/jwtHelper");
+const { signAccessToken } = require("../utils/jwt");
 
 exports.register = async (req, res, next) => {
   try {

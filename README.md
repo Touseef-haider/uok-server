@@ -1,6 +1,6 @@
-# nodejs-boilerplate-with-docker
-Nodejs boilerplate with docker
+# University Of Karachi App Server
 
+NODEJS BASED WEB SERVER
 
 ## ⛓️ Installation
 
@@ -62,15 +62,17 @@ yarn start
 Running with docker:
 
 ## Build image using command:
+
 ```
    docker build -t image-name .
-    
+
 ```
 
 ## Run container with build image:
+
 ```
    docker run -p 8081:8081 --name container-name image-name
-    
+
 ```
 
 ## If you want to persist data you can map volumes
@@ -88,7 +90,6 @@ yarn lint
 The environment variables can be found and modified in the `.env` file. They come with these default values:
 
 ```bash
-    
      ACCESS_TOKEN_SECRET*
      REFRESH_TOKEN_SECRET*
      DATABASE_URL*
@@ -112,11 +113,9 @@ The environment variables can be found and modified in the `.env` file. They com
 
 List of available routes:
 
-
 **User routes**:\
-`POST /user` - create a user\
-`GET /user` - get all users\
-
+`POST /users` - create a user\
+`GET /users` - get all users\
 
 ## ⁉️ Error Handling
 
@@ -143,13 +142,13 @@ The validation schemas are defined in the `src/validations` directory and are us
 To require authentication for certain routes, you can use the `auth` middleware.
 
 ```javascript
-const express = require('express');
-const requireAuth = require('../../middlewares/requireAuth');
-const { addUser } = require('../../controllers/user');
+const express = require("express");
+const requireAuth = require("../../middlewares/requireAuth");
+const { addUser } = require("../../controllers/user");
 
 const router = express.Router();
 
-router.post('/users', requireAuth, addUser);
+router.post("/users", requireAuth, addUser);
 ```
 
 These routes require a valid JWT access token in the Authorization request header using the Bearer schema. If the request does not contain a valid access token, an Unauthorized (401) error is thrown.
@@ -171,13 +170,13 @@ A refresh token is valid for 30 days. You can modify this expiration time by cha
 The `auth` middleware can also be used to require certain rights/permissions to access a route.
 
 ```javascript
-const express = require('express');
-const roleAuth = require('../../middlewares/roleAuth');
-const { addUser } = require('../../controllers/user');
+const express = require("express");
+const roleAuth = require("../../middlewares/roleAuth");
+const { addUser } = require("../../controllers/user");
 
 const router = express.Router();
 
-router.post('/users', roleAuth(['admin', 'tpa_admin']), addUser);
+router.post("/users", roleAuth(["admin", "super_admin"]), addUser);
 ```
 
 In the example above, an authenticated user can access this route only if that user has the `manageUsers` permission.
@@ -185,7 +184,6 @@ In the example above, an authenticated user can access this route only if that u
 The permissions are role-based. You can view the permissions/rights of each role in the `src/config/roles.js` file.
 
 If the user making the request does not have the required permissions to access this route, a Forbidden (403) error is thrown.
-
 
 ## ☑️ Linting
 
@@ -198,6 +196,5 @@ To modify the ESLint configuration, update the `.eslintrc.json` file. To modify 
 To prevent a certain file or directory from being linted, add it to `.eslintignore` and `.prettierignore`.
 
 To maintain a consistent coding style across different IDEs, the project contains `.editorconfig`
-# uok-server
-# uok-server
+
 # uok-server

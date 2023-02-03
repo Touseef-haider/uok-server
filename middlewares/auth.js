@@ -1,4 +1,4 @@
-const { verifyAccessToken } = require("../utils/jwtHelper");
+const { verifyAccessToken } = require("../utils/jwt");
 const createError = require("http-errors");
 
 const requireAuth = (req, res, next) => {
