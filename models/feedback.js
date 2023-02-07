@@ -9,6 +9,10 @@ const feedbackSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: "profile",
+  },
 });
 
 module.exports = mongoose.model("feedback", feedbackSchema);

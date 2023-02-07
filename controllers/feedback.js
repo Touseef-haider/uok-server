@@ -3,6 +3,7 @@ const Feedback = require("../models/feedback");
 exports.addFeedback = async (req, res, next) => {
   try {
     const feedback = new Feedback({ ...req.body });
+    feedback.user = req.user._id;
     await feedback.save();
     return res.status(200).json({
       message: "feedback added successfully",
@@ -14,7 +15,9 @@ exports.addFeedback = async (req, res, next) => {
 
 exports.getFeedbacks = async (req, res, next) => {
   try {
-    const activities = await Feedback.find({}).sort({ date: -1 });
+    const activities = await Feedback.find({})
+      .populate("user")
+      .sort({ date: -1 });
     res.status(200).json(activities);
   } catch (error) {
     return next(error);
@@ -32,6 +35,14 @@ exports.getFeedbacksByMonth = async (req, res, next) => {
         },
       },
       { $match: { month: parseInt(req.query.month) } },
+      {
+        $lookup: {
+          from: "profiles",
+          localField: "user",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
     ]);
     return res.status(200).json(feedbackByMonths);
   } catch (error) {
@@ -52,7 +63,9 @@ exports.updateFeedback = async (req, res, next) => {
 
 exports.getParticularFeedback = async (req, res, next) => {
   try {
-    const feedback = await Feedback.findById({ _id: req.params.id });
+    const feedback = await Feedback.findById({ _id: req.params.id }).populate(
+      "user"
+    );
     return res.status(200).json(feedback);
   } catch (err) {
     return next(err);
