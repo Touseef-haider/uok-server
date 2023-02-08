@@ -4,6 +4,7 @@ exports.addFeedback = async (req, res, next) => {
   try {
     const feedback = new Feedback({ ...req.body });
     feedback.user = req.user._id;
+
     await feedback.save();
     return res.status(200).json({
       message: "feedback added successfully",
@@ -31,16 +32,23 @@ exports.getFeedbacksByMonth = async (req, res, next) => {
       {
         $project: {
           month: { $month: "$date" },
+          user: 1,
           message: 1,
         },
       },
       { $match: { month: parseInt(req.query.month) } },
       {
         $lookup: {
-          from: "profiles",
+          from: "users",
           localField: "user",
           foreignField: "_id",
           as: "user",
+        },
+      },
+      {
+        $unwind: {
+          path: "$user",
+          preserveNullAndEmptyArrays: false,
         },
       },
     ]);

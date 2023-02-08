@@ -11,7 +11,7 @@ const feedbackSchema = new Schema({
   },
   user: {
     type: mongoose.Types.ObjectId,
-    ref: "profile",
+    ref: "user",
   },
 });
 
