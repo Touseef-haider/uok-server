@@ -13,7 +13,7 @@ const scholarshipSchema = new Schema({
     type: String,
   },
   charges: {
-    type: Number,
+    type: String,
   },
   url: {
     type: String,

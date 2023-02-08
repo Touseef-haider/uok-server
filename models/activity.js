@@ -10,7 +10,7 @@ const activitySchema = new Schema({
     ref: "category",
   },
   charges: {
-    type: Number,
+    type: String,
   },
   timing: {
     type: String,

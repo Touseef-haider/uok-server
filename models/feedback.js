@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const feedbackSchema = new Schema({
+  subject:{
+    type: String,
+  },
   message: {
     type: String,
   },

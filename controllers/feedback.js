@@ -10,6 +10,7 @@ exports.addFeedback = async (req, res, next) => {
       message: "feedback added successfully",
     });
   } catch (error) {
+    console.log(error);
     return next(error);
   }
 };
