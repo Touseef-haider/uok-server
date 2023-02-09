@@ -74,6 +74,25 @@ exports.getParentCategories = async (req, res, next) => {
     return next(error);
   }
 };
+
+exports.getChildsOnly = async (req, res, next) => {
+  try {
+    const childs = [];
+    const parentCategories = await Category.find({ parent: null }).populate(
+      "child"
+    );
+
+    for (let i = 0; i < parentCategories.length; i++) {
+      for (let j = 0; j < parentCategories[i]?.child.length; j++) {
+        childs.push(parentCategories[i]?.child[j]);
+      }
+    }
+
+    return res.status(200).json(childs);
+  } catch (err) {
+    return next(err);
+  }
+};
 // get the parent category with its ancestors
 exports.getCategory = async (req, res, next) => {
   try {

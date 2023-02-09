@@ -6,6 +6,7 @@ const {
   getCategory,
   deleteCategory,
   getAllParents,
+  getChildsOnly,
   getParentCategoriesWithTheirChilds,
   updateCategory,
 } = require("../controllers/category");
@@ -13,6 +14,7 @@ const requireAuth = require("../middlewares/auth");
 
 router.post("/", [requireAuth], validateCategory, addCategory);
 router.get("/", [requireAuth], getCategories);
+router.get("/child", [requireAuth], getChildsOnly);
 router.get("/parents", [requireAuth], getAllParents);
 router.get("/parents", getParentCategoriesWithTheirChilds);
 router.get("/:id", getCategory);
