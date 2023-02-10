@@ -35,6 +35,7 @@ exports.getFeedbacksByMonth = async (req, res, next) => {
           month: { $month: "$date" },
           user: 1,
           message: 1,
+          subject:1
         },
       },
       { $match: { month: parseInt(req.query.month) } },
