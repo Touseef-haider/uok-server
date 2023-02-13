@@ -8,6 +8,7 @@ const cors = require("cors");
 const connect = require("./db");
 const routes = require("./routes");
 const config = require("./config");
+const cloudinary = require('cloudinary');
 
 const app = express();
 
@@ -23,6 +24,13 @@ app.use(helmet());
 app.use(logger("dev"));
 // cross origin resource sharing
 app.use(cors());
+
+//Setting up Cloudinary Configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+})
 
 // request headers
 app.use((req, res, next) => {
