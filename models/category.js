@@ -29,11 +29,11 @@ const categorySchema = new Schema(
       type: String,
     },
     image: {
-      type: Buffer,
+      type: String,
     },
     programs: [
       {
-        type: String,
+        type: Array,
       },
     ],
     ancestors: [

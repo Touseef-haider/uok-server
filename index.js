@@ -53,6 +53,7 @@ app.use("/api", routes);
 // error handling
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
+  console.log(err);
   return res.json({
     message: err.message,
     error: err,

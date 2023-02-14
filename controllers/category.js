@@ -3,6 +3,7 @@ const createError = require("http-errors");
 const Category = require("../models/category");
 
 exports.addCategory = async (req, res, next) => {
+  console.log(req.body);
   const result = validationResult(req);
   try {
     if (!result.isEmpty()) {
@@ -100,12 +101,7 @@ exports.getCategory = async (req, res, next) => {
       _id: req.params.id,
     })
       .populate(["child"])
-      .select({
-        _id: true,
-        name: true,
-        ancestors: true,
-        child: true,
-      })
+      
       .exec();
     return res.status(201).send({
       status: "success",
@@ -155,14 +151,21 @@ exports.updateCategory = async (req, res, next) => {
 // for deleting category
 exports.deleteCategory = async (req, res, next) => {
   try {
-    const err = await Category.findOneAndDelete({
+    const data = await Category.findOneAndDelete({
       _id: req.params.id,
     });
-    if (!err) {
-      await Category.deleteMany({
-        "ancestors._id": req.params.id,
-      });
-    }
+
+    await Category.findByIdAndUpdate(
+      {
+        _id: data?.parent,
+      },
+      {
+        $pull: {
+          child: req.params.id,
+        },
+      }
+    );
+
     return res.status(200).json("category deleted");
   } catch (error) {
     return next(error);
@@ -173,13 +176,14 @@ exports.getAllParents = async (req, res, next) => {
   try {
     const parents = await Category.find({
       parent: null,
-    }).select("-child -ancestors");
+    });
 
     return res.status(200).json(parents);
   } catch (error) {
     return next(error);
   }
 };
+
 
 // for validation
 exports.validateCategory = [body("name").isString()];
